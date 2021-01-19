@@ -34,11 +34,11 @@ class Office extends Model
     }
 
     /**
-     * Get the phones
+     * Get all of the office's phones.
      */
     public function phones()
     {
-        return $this->hasMany(\App\Models\Phone::class);
+        return $this->morphMany(\App\Models\Phone::class, 'phoneable');
     }
 
 }

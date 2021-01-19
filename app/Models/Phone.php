@@ -10,11 +10,11 @@ class Phone extends Model
     use HasFactory;
 
     /**
-     * Get the office that owns the phone.
+     * Get the parent imageable model (user or post).
      */
-    public function office()
+    public function phoneable()
     {
-        return $this->belongsTo(\App\Models\Office::class);
+        return $this->morphTo();
     }
 
 }

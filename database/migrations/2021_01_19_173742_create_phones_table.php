@@ -16,6 +16,8 @@ class CreatePhonesTable extends Migration
         Schema::create('phones', function (Blueprint $table) {
             $table->id();
             $table->string('phone')->index();
+            $table->unsignedBigInteger('phoneable_id')->index();
+            $table->string('phoneable_type')->index();
             $table->softDeletes();
             $table->timestamps();
         });

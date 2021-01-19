@@ -8,4 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class Courier extends Model
 {
     use HasFactory;
+
+    /**
+     * Get the office that owns the courier.
+     */
+    public function office()
+    {
+        return $this->belongsTo(\App\Models\Office::class);
+    }
+
+    /**
+     * Get all of the courier's phones.
+     */
+    public function phones()
+    {
+        return $this->morphMany(\App\Models\Phone::class, 'phoneable');
+    }
+
 }
