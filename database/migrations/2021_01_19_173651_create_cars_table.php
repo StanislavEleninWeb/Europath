@@ -18,6 +18,7 @@ class CreateCarsTable extends Migration
             $table->string('brand', 50);
             $table->string('model', 50);
             $table->string('registration', 10)->unique();
+            $table->string('fuel', 20);
             $table->float('fuel_consumption', 4, 2);
             $table->timestamps();
         });

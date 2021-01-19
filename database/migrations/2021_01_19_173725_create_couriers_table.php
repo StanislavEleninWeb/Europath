@@ -14,7 +14,9 @@ class CreateCouriersTable extends Migration
     public function up()
     {
         Schema::create('couriers', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id');
+            $table->foreignId('user_id')->constrained();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
