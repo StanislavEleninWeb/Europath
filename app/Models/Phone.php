@@ -12,9 +12,9 @@ class Phone extends Model
     /**
      * Get the office that owns the phone.
      */
-    public function phone()
+    public function office()
     {
-        return $this->belongsTo(\App\Models\City::class);
+        return $this->belongsTo(\App\Models\Office::class);
     }
 
 }

@@ -12,7 +12,7 @@ class City extends Model
     /**
      * Get the region that owns the city.
      */
-    public function province()
+    public function region()
     {
         return $this->belongsTo(\App\Models\Region::class);
     }
@@ -22,7 +22,7 @@ class City extends Model
      */
     public function offices()
     {
-        return $this->hasMany(\App\Models\Office::class);
+        return $this->belongsToMany(\App\Models\Office::class);
     }
 
 }

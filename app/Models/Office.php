@@ -14,7 +14,7 @@ class Office extends Model
      */
     public function city()
     {
-        return $this->belongsTo(\App\Models\City::class);
+        return $this->belongsToMany(\App\Models\City::class);
     }
 
     /**
