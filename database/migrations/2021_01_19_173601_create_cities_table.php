@@ -16,10 +16,10 @@ class CreateCitiesTable extends Migration
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
             $table->foreignId('region_id')->constrained();
-            $table->string('post_code')->index();
+            $table->string('post_code', 10)->index();
             $table->enum('prefix', ['с.', 'гр.']);
-            $table->string('name')->index();
-            $table->string('name_en')->index();
+            $table->string('name', 50)->index();
+            $table->string('name_en', 50)->index();
             $table->timestamps();
         });
     }

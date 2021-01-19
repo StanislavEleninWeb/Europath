@@ -20,6 +20,7 @@ class CreateCarsTable extends Migration
             $table->string('registration', 10)->unique();
             $table->string('fuel', 20);
             $table->float('fuel_consumption', 4, 2);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
