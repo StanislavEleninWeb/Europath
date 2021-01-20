@@ -4,15 +4,10 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
+use App\Models\Office;
+
 class OfficeSeeder extends Seeder
 {
-
-	$this->offices = [
-		[
-			'name' => ''
-		],
-		[],
-	];
 
     /**
      * Run the database seeds.
@@ -21,6 +16,8 @@ class OfficeSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Office::factory()->count(5)->create()->each(function($office){
+            $office->city()->attach([3]);
+        });
     }
 }

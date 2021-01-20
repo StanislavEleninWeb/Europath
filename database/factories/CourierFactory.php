@@ -2,8 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\Courier;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
+use App\Models\Courier;
 
 class CourierFactory extends Factory
 {
@@ -22,7 +23,8 @@ class CourierFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'id' => rand(1,10)
+            'uuid' => Str::uuid();
         ];
     }
 }

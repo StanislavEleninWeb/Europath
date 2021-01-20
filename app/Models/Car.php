@@ -12,8 +12,8 @@ class Car extends Model
     /**
      * Get the office that owns the car.
      */
-    public function region()
+    public function office()
     {
-        return $this->belongsTo(\App\Models\Office::class);
+        return $this->belongsTo(\App\Models\Office::class, 'office_car');
     }
 }

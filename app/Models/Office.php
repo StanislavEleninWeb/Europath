@@ -22,7 +22,7 @@ class Office extends Model
      */
     public function cars()
     {
-        return $this->hasMany(\App\Models\Car::class);
+        return $this->hasMany(\App\Models\Car::class, 'office_car')->withTimestamps();
     }
 
     /**

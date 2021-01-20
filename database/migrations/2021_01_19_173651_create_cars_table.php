@@ -15,6 +15,7 @@ class CreateCarsTable extends Migration
     {
         Schema::create('cars', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('office_id')->constrained();
             $table->string('brand', 50);
             $table->string('model', 50);
             $table->string('registration', 10)->unique();

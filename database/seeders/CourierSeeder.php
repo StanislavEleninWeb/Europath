@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
+use App\Models\Courier;
+
 class CourierSeeder extends Seeder
 {
     /**
@@ -13,6 +15,6 @@ class CourierSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Courier::factory()->count(3)->create();
     }
 }
