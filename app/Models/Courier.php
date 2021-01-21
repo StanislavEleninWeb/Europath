@@ -25,4 +25,11 @@ class Courier extends Model
         return $this->morphMany(\App\Models\Phone::class, 'phoneable');
     }
 
+    /**
+     * Get the car's owner.
+     */
+    public function car()
+    {
+        return $this->hasOneThrough(\App\Models\Car::class, \App\Models\CourierCar::class);
+    }
 }

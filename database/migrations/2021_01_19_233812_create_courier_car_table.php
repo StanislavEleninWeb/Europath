@@ -19,8 +19,6 @@ class CreateCourierCarTable extends Migration
             $table->foreignId('car_id')->constrained();
             $table->softDeletes();
             $table->timestamps();
-
-            $table->unique(['courier_id', 'car_id']);
         });
     }
 

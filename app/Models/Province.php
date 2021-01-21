@@ -26,4 +26,12 @@ class Province extends Model
         return $this->hasMany(\App\Models\Region::class);
     }
 
+    /**
+     * Get all of the cities for the province.
+     */
+    public function cities()
+    {
+        return $this->hasManyThrough(\App\Models\City::class, \App\Models\Region::class);
+    }
+
 }

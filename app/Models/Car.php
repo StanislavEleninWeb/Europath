@@ -16,4 +16,12 @@ class Car extends Model
     {
         return $this->belongsTo(\App\Models\Office::class, 'office_car');
     }
+
+    /**
+     * Get the car's courier.
+     */
+    public function courier()
+    {
+        return $this->hasOneThrough(\App\Models\Courier::class, \App\Models\CourierCar::class);
+    }
 }
