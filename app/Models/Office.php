@@ -10,9 +10,21 @@ class Office extends Model
     use HasFactory;
 
     /**
-     * Get the city that owns the office.
+     * The attributes that are mass assignable.
+     *
+     * @var array
      */
-    public function city()
+    protected $fillable = [
+        'name',
+        'manager_id',
+        'address',
+        'opening_hours',
+    ];
+
+    /**
+     * Get the cities that owns the office.
+     */
+    public function cities()
     {
         return $this->belongsToMany(\App\Models\City::class);
     }

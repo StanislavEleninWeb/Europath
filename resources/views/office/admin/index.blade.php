@@ -23,8 +23,8 @@
 					<td>{{ $itr->address }}</td>
 					<td>{{ $itr->opening_hours }}</td>
 					<td>
-						<a href="{{ route('admin.city.edit', $itr->id) }}" class="btn btn-sm btn-warning">Edit</a>
-						<form action="{{ route('admin.city.destroy', $itr->id) }}" method="POST">
+						<a href="{{ route('admin.office.edit', $itr->id) }}" class="btn btn-sm btn-warning">Edit</a>
+						<form action="{{ route('admin.office.destroy', $itr->id) }}" method="POST">
 							@csrf
 							@method('DELETE')
 							<input type="submit" class="btn btn-sm btn-danger" value="Delete">

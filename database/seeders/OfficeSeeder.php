@@ -17,7 +17,7 @@ class OfficeSeeder extends Seeder
     public function run()
     {
         Office::factory()->count(5)->create()->each(function($office){
-            $office->city()->attach([3]);
+            $office->cities()->sync([3]);
         });
     }
 }

@@ -4,7 +4,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col pt-3">
-			<form method="POST" action="{{ route('admin.city.store') }}" class="form mt-3">
+			<form method="POST" action="{{ route('admin.office.store') }}" class="form mt-3">
 				@csrf
 
 				@include('components.form-errors')
@@ -19,6 +19,16 @@
 					</select>
 				</div>
 
+				<div class="mb-3">
+					<label class="form-label">Cities:</label>
+					<br/>
+					@foreach($cities as $city)
+					<label class="from-control m-3">
+						<input type="checkbox" name="cities[]" value="{{ $city->id }}">
+						{{ $city->name }}
+					</label>
+					@endforeach
+				</div>
 
 				<div class="mb-3">
 					<label class="form-label">Name:</label>
@@ -36,7 +46,7 @@
 
 				<div>
 				<input type="submit" value="Save" class="btn btn-primary">
-					<a href="{{ route('admin.city.index') }}" class="btn btn-secondary">Back</a>
+					<a href="{{ route('admin.office.index') }}" class="btn btn-secondary">Back</a>
 				</div>
 			</form>
 		</div>

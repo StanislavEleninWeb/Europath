@@ -47,7 +47,9 @@ class OfficeController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        $office = Office::create($request->validated());
+        $validated = $request->validated();
+        $office = Office::create($validated);
+        $office->cities()->sync($validated['cities']);
 
         return redirect()->route('admin.office.edit', $office->id);
     }
@@ -62,6 +64,9 @@ class OfficeController extends Controller
     {
         return view('office.admin.edit', [
             'cities' => City::all(),
+            'managers' => User::with(['roles'])->whereHas('roles', function($query){
+                return $query->where('name', 'manager');
+            })->get(),
             'office' => $office,
         ]);
     }
@@ -75,7 +80,9 @@ class OfficeController extends Controller
      */
     public function update(StorePostRequest $request, Office $office)
     {
-        $office->update($request->validated());
+        $validated = $request->validated();
+        $office->update($validated);
+        $office->cities()->sync($validated['cities']);
 
         return redirect()->route('admin.office.edit', $office->id);
     }
@@ -88,6 +95,7 @@ class OfficeController extends Controller
      */
     public function destroy(Office $office)
     {
+        $office->cities()->sync([]);
         $office->delete();
 
         return redirect()->back();

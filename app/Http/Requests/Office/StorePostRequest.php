@@ -15,7 +15,7 @@ class StorePostRequest extends FormRequest
     {
         return true;
     }
-
+    
     /**
      * Get the validation rules that apply to the request.
      *
@@ -24,6 +24,7 @@ class StorePostRequest extends FormRequest
     public function rules()
     {
         return [
+            'cities.*' => 'nullable|integer',
             'name' => 'required|string|min:2|max:191',
             'manager_id' => 'required|integer',
             'address' => 'required',
