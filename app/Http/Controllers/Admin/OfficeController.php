@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Models\Province;
 use App\Models\City;
 use App\Models\Office;
 use App\Models\User;
@@ -35,7 +36,7 @@ class OfficeController extends Controller
             'managers' => User::with(['roles'])->whereHas('roles', function($query){
                 return $query->where('name', 'manager');
             })->get(),
-            'cities' => City::all(),
+            'provinces' => Province::all(),
         ]);
     }
 

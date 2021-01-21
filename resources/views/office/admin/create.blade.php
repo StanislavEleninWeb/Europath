@@ -11,6 +11,7 @@
 
 				<div class="mb-3">
 					<label class="form-label">Manger:</label>
+					<small class="text-secondary">* Show users with role manager</small>
 					<select name="manager_id" class="form-control" required>
 						<option></option>
 						@foreach($managers as $itr)
@@ -19,15 +20,14 @@
 					</select>
 				</div>
 
-				<div class="mb-3">
-					<label class="form-label">Cities:</label>
-					<br/>
-					@foreach($cities as $city)
-					<label class="from-control m-3">
-						<input type="checkbox" name="cities[]" value="{{ $city->id }}">
-						{{ $city->name }}
-					</label>
-					@endforeach
+				<div id="province_container" class="mb-3">
+					<label class="form-label">Province:</label>
+					<select id="province" class="form-control">
+						<option></option>
+						@foreach($provinces as $province)
+						<option value="{{ $province->id }}">{{ $province->name }}</option>
+						@endforeach
+					</select>
 				</div>
 
 				<div class="mb-3">
@@ -52,4 +52,12 @@
 		</div>
 	</div>
 </div>
+@endsection
+
+@section('script')
+@parent
+
+<!-- Office -->
+<script src="{{ mix('js/office.js') }}" defer></script>
+
 @endsection

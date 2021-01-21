@@ -22,9 +22,13 @@ class CourierFactory extends Factory
      */
     public function definition()
     {
+        $user_ids = [1,2,3,4,5,6,7,8,9,10];
+        shuffle($user_ids);
+
         return [
-            'id' => rand(1,10)
-            'uuid' => Str::uuid();
+            'id' => array_pop($user_ids),
+            'uuid' => Str::uuid(),
+            'office_id' => rand(1,5),
         ];
     }
 }

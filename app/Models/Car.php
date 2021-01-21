@@ -14,7 +14,7 @@ class Car extends Model
      */
     public function office()
     {
-        return $this->belongsTo(\App\Models\Office::class, 'office_car');
+        return $this->belongsTo(\App\Models\Office::class);
     }
 
     /**

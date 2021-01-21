@@ -14,72 +14,40 @@ class OfficeController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Office::all());
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display city by office id.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function getCityByOfficeId($id)
     {
-        //
+        $office = Office::with('cities')->findOrFail($id);
+        return response()->json($office->cities);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Display a list of cities by office id.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function getCarsByOfficeId($id)
     {
-        //
+        $office = Office::with('cars')->findOrFail($id);
+        return response()->json($office->cars);
     }
 
     /**
-     * Display the specified resource.
+     * Display a list of cities by office id.
      *
-     * @param  \App\Models\Office  $office
      * @return \Illuminate\Http\Response
      */
-    public function show(Office $office)
+    public function getCouriersByOfficeId($id)
     {
-        //
+        $office = Office::with('couriers')->findOrFail($id);
+        return response()->json($office->couriers);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Office  $office
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Office $office)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Office  $office
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Office $office)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Office  $office
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Office $office)
-    {
-        //
-    }
 }

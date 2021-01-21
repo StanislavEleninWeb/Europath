@@ -14,72 +14,28 @@ class ProvinceController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Province::all());
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display a listing of the regions by province id.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function getRegionsByProvinceId($id)
     {
-        //
+        $province = Province::with('regions')->findOrFail($id);
+        return response()->json($province->regions);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Display a listing of the cities by province id.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function getCitiesByProvinceId($id)
     {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Province  $province
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Province $province)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Province  $province
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Province $province)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Province  $province
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Province $province)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Province  $province
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Province $province)
-    {
-        //
+        $province = Province::with('cities')->findOrFail($id);
+        return response()->json($province->cities);
     }
 }

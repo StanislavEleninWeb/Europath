@@ -14,72 +14,29 @@ class CityController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(City::all());
     }
 
-    /**
-     * Show the form for creating a new resource.
+        /**
+     * Display province by region id.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function getProvinceByCityId($id)
     {
-        //
+        $city = City::with('region')->findOrFail($id);
+        return response()->json($city->region->province);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Display a list of cities by region id.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function getRegionByCityId($id)
     {
-        //
+        $city = City::with('region')->findOrFail($id);
+        return response()->json($city->region);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\City  $city
-     * @return \Illuminate\Http\Response
-     */
-    public function show(City $city)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\City  $city
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(City $city)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\City  $city
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, City $city)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\City  $city
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(City $city)
-    {
-        //
-    }
 }

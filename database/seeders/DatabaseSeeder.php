@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
 	        UserSeeder::class,
             ProvinceSeeder::class,
             OfficeSeeder::class,
-            // CarSeeder::class,
-            // Courier::class,
+            CarSeeder::class,
+            CourierSeeder::class,
 	    ]);
     }
 }

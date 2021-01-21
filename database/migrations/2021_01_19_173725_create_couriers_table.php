@@ -16,6 +16,7 @@ class CreateCouriersTable extends Migration
         Schema::create('couriers', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->primary();
             $table->uuid('uuid');
+            $table->foreignId('office_id')->constrained();
             $table->softDeletes();
             $table->timestamps();
 
