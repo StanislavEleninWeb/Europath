@@ -10,6 +10,15 @@ class Region extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'province_id', 'name', 'name_en'
+    ];
+
+    /**
      * Get the province that owns the region.
      */
     public function province()

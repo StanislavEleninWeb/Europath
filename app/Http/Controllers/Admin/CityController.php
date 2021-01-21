@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\City;
 use Illuminate\Http\Request;
+
+use App\Models\Region;
+use App\Models\City;
+use App\Http\Requests\City\StorePostRequest;
 
 class CityController extends Controller
 {
@@ -15,7 +18,9 @@ class CityController extends Controller
      */
     public function index()
     {
-        //
+        return view('city.admin.index', [
+            'cities' => City::with('region')->simplePaginate(),
+        ]);
     }
 
     /**
@@ -25,7 +30,9 @@ class CityController extends Controller
      */
     public function create()
     {
-        //
+        return view('city.admin.create', [
+            'regions' => Region::all(),
+        ]);
     }
 
     /**
@@ -34,20 +41,11 @@ class CityController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        //
-    }
+        $city = City::create($request->validated());
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\City  $city
-     * @return \Illuminate\Http\Response
-     */
-    public function show(City $city)
-    {
-        //
+        return redirect()->route('admin.city.edit', $city->id);
     }
 
     /**
@@ -58,7 +56,10 @@ class CityController extends Controller
      */
     public function edit(City $city)
     {
-        //
+        return view('city.admin.edit', [
+            'regions' => Region::all(),
+            'city' => $city,
+        ]);
     }
 
     /**
@@ -68,9 +69,11 @@ class CityController extends Controller
      * @param  \App\Models\City  $city
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, City $city)
+    public function update(StorePostRequest $request, City $city)
     {
-        //
+        $city->update($request->validated());
+
+        return redirect()->route('admin.city.edit', $city->id);
     }
 
     /**
@@ -81,6 +84,8 @@ class CityController extends Controller
      */
     public function destroy(City $city)
     {
-        //
+        $city->delete();
+
+        return redirect()->back();
     }
 }

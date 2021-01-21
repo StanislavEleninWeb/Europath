@@ -41,4 +41,12 @@ class Office extends Model
         return $this->morphMany(\App\Models\Phone::class, 'phoneable');
     }
 
+    /**
+     * Get the user that owns the office.
+     */
+    public function manager()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'manager_id', 'id');
+    }
+
 }

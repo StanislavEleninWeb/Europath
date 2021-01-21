@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Region;
 use Illuminate\Http\Request;
+
+use App\Models\Province;
+use App\Models\Region;
+use App\Http\Requests\Region\StorePostRequest;
+
 
 class RegionController extends Controller
 {
@@ -15,7 +19,9 @@ class RegionController extends Controller
      */
     public function index()
     {
-        //
+        return view('region.admin.index', [
+            'region' => Region::simplePaginate(),
+        ]);
     }
 
     /**
@@ -25,7 +31,9 @@ class RegionController extends Controller
      */
     public function create()
     {
-        //
+        return view('region.admin.create', [
+            'provinces' => Province::all(),
+        ]);
     }
 
     /**
@@ -34,20 +42,11 @@ class RegionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        //
-    }
+        $region = Region::create($request->validated());
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Region  $region
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Region $region)
-    {
-        //
+        return redirect()->route('admin.region.edit', $region->id);
     }
 
     /**
@@ -58,7 +57,10 @@ class RegionController extends Controller
      */
     public function edit(Region $region)
     {
-        //
+        return view('region.admin.edit', [
+            'provinces' => Province::all(),
+            'region' => $region,
+        ]);
     }
 
     /**
@@ -68,9 +70,11 @@ class RegionController extends Controller
      * @param  \App\Models\Region  $region
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Region $region)
+    public function update(StorePostRequest $request, Region $region)
     {
-        //
+        $region->update($request->validated());
+
+        return redirect()->route('admin.region.edit', $region->id);
     }
 
     /**
@@ -81,6 +85,8 @@ class RegionController extends Controller
      */
     public function destroy(Region $region)
     {
-        //
+        $region->delete();
+
+        return redirect()->back();
     }
 }

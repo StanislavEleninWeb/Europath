@@ -16,7 +16,7 @@ class CreateOfficesTable extends Migration
         Schema::create('offices', function (Blueprint $table) {
             $table->id();
             $table->string('name')->index();
-            $table->foreignId('manager')->constrained('users');
+            $table->foreignId('manager_id')->constrained('users');
             $table->string('address');
             $table->text('opening_hours');
             $table->softDeletes();

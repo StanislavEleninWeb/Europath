@@ -10,6 +10,15 @@ class City extends Model
     use HasFactory;
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'region_id', 'post_code', 'name', 'name_en'
+    ];
+
+    /**
      * Get the region that owns the city.
      */
     public function region()

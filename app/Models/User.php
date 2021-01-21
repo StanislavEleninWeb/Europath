@@ -60,12 +60,20 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the office associated with the user.
+     */
+    public function office()
+    {
+        return $this->hasOne(\App\Models\Office::class, 'manager_id', 'id');
+    }
+
+    /**
      * Get the user's full name.
      *
      * @param  string  $value
      * @return string
      */
-    public function getFirstNameAttribute()
+    public function getNameAttribute()
     {
         return $this->first_name . ' ' . $this->middle_name . ' ' . $this->last_name;
     }

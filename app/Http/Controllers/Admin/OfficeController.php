@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Office;
 use Illuminate\Http\Request;
+
+use App\Models\City;
+use App\Models\Office;
+use App\Models\User;
+use App\Http\Requests\Office\StorePostRequest;
 
 class OfficeController extends Controller
 {
@@ -15,7 +19,9 @@ class OfficeController extends Controller
      */
     public function index()
     {
-        //
+        return view('office.admin.index', [
+            'offices' => Office::with('manager')->simplePaginate(),
+        ]);
     }
 
     /**
@@ -24,8 +30,13 @@ class OfficeController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+    {       
+        return view('office.admin.create', [
+            'managers' => User::with(['roles'])->whereHas('roles', function($query){
+                return $query->where('name', 'manager');
+            })->get(),
+            'cities' => City::all(),
+        ]);
     }
 
     /**
@@ -34,20 +45,11 @@ class OfficeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        //
-    }
+        $office = Office::create($request->validated());
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Office  $office
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Office $office)
-    {
-        //
+        return redirect()->route('admin.office.edit', $office->id);
     }
 
     /**
@@ -58,7 +60,10 @@ class OfficeController extends Controller
      */
     public function edit(Office $office)
     {
-        //
+        return view('office.admin.edit', [
+            'cities' => City::all(),
+            'office' => $office,
+        ]);
     }
 
     /**
@@ -68,9 +73,11 @@ class OfficeController extends Controller
      * @param  \App\Models\Office  $office
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Office $office)
+    public function update(StorePostRequest $request, Office $office)
     {
-        //
+        $office->update($request->validated());
+
+        return redirect()->route('admin.office.edit', $office->id);
     }
 
     /**
@@ -81,6 +88,8 @@ class OfficeController extends Controller
      */
     public function destroy(Office $office)
     {
-        //
+        $office->delete();
+
+        return redirect()->back();
     }
 }

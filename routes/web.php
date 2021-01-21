@@ -46,6 +46,10 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function(){
 		'province' => \App\Http\Controllers\Admin\ProvinceController::class,
 		'region' => \App\Http\Controllers\Admin\RegionController::class,
 		'city' => \App\Http\Controllers\Admin\CityController::class,
+		'office' => \App\Http\Controllers\Admin\OfficeController::class,
+		'car' => \App\Http\Controllers\Admin\CarController::class,
+		'courier' => \App\Http\Controllers\Admin\CourierController::class,
+
 	]);
 
 });
