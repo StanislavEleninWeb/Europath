@@ -14,72 +14,29 @@ class CourierController extends Controller
      */
     public function index()
     {
-        //
+        return response()->json(Courier::all());
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display courier by id.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function getCourierById($id)
     {
-        //
+        $courier = Courier::with('phones')->findOrFail($id);
+        return response()->json($courier);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Display cars by courier id.
      *
-     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function getCarsByCourierId($id)
     {
-        //
+        $courier = Courier::with('cars')->findOrFail($id);
+        return response()->json($courier->cars);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Courier  $courier
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Courier $courier)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Courier  $courier
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Courier $courier)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Courier  $courier
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Courier $courier)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Courier  $courier
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Courier $courier)
-    {
-        //
-    }
 }

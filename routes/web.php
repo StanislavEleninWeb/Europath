@@ -7,6 +7,7 @@ use App\Http\Controllers\ProvinceController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\OfficeController;
+use App\Http\Controllers\CourierController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,9 +57,11 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function(){
 		'city' => \App\Http\Controllers\Admin\CityController::class,
 		'office' => \App\Http\Controllers\Admin\OfficeController::class,
 		'car' => \App\Http\Controllers\Admin\CarController::class,
-		'courier' => \App\Http\Controllers\Admin\CourierController::class,
-
+		'phone' => \App\Http\Controllers\Admin\PhoneController::class,
+		'user' => \App\Http\Controllers\Admin\UserController::class,
 	]);
+
+	Route::resource('courier', \App\Http\Controllers\Admin\CourierController::class)->only(['index', 'show', 'destroy']);
 
 });
 
@@ -94,4 +97,10 @@ Route::name('office.')->group(function(){
 	Route::get('office/{id}/car', [OfficeController::class, 'getCarsByOfficeId'])->name('car');
 	Route::get('office/{id}/city', [OfficeController::class, 'getCityByOfficeId'])->name('city');
 	Route::get('office/{id}/courier', [OfficeController::class, 'getCouriersByOfficeId'])->name('courier');
+});
+
+Route::name('courier.')->group(function(){
+	Route::get('courier', [CourierController::class, 'index'])->name('all');
+	Route::get('courier/{id}', [CourierController::class, 'getCourierById'])->name('courier');
+	Route::get('courier/{id}/car', [CourierController::class, 'getCarsByCourierId'])->name('car');
 });

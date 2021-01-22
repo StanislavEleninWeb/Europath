@@ -22,6 +22,6 @@ class Car extends Model
      */
     public function courier()
     {
-        return $this->hasOneThrough(\App\Models\Courier::class, \App\Models\CourierCar::class);
+        return $this->belongsToMany(\App\Models\Courier::class, 'courier_car')->withPivot('deleted_at', 'created_at', 'updated_at');
     }
 }

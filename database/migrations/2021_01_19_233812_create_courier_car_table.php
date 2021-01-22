@@ -15,8 +15,8 @@ class CreateCourierCarTable extends Migration
     {
         Schema::create('courier_car', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('courier_id')->constrained();
             $table->foreignId('car_id')->constrained();
+            $table->foreignId('courier_id')->constrained();
             $table->softDeletes();
             $table->timestamps();
         });

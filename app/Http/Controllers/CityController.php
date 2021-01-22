@@ -17,7 +17,7 @@ class CityController extends Controller
         return response()->json(City::all());
     }
 
-        /**
+    /**
      * Display province by region id.
      *
      * @return \Illuminate\Http\Response

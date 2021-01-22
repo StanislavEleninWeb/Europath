@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Courier;
 use Illuminate\Http\Request;
+
+use App\Models\Courier;
 
 class CourierController extends Controller
 {
@@ -15,28 +16,9 @@ class CourierController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        return view('courier.admin.index', [
+            'couriers' => Courier::with(['user', 'office'])->simplePaginate(),
+        ]);
     }
 
     /**
@@ -45,32 +27,14 @@ class CourierController extends Controller
      * @param  \App\Models\Courier  $courier
      * @return \Illuminate\Http\Response
      */
-    public function show(Courier $courier)
+    public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Courier  $courier
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Courier $courier)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Courier  $courier
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Courier $courier)
-    {
-        //
+        $courier = Courier::with(['user', 'office', 'car' => function($query){
+            return $query->wherePivot('deleted_at', NULL);
+        }])->findOrFail($id);
+        return view('courier.admin.show', [
+            'courier' => $courier,
+        ]);
     }
 
     /**
@@ -81,6 +45,8 @@ class CourierController extends Controller
      */
     public function destroy(Courier $courier)
     {
-        //
+        $courier->delete();
+
+        return redirect()->back();
     }
 }

@@ -45,6 +45,27 @@
                     </x-nav-link>
                 </div>
 
+                <!-- Navigation Links -->
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('admin.courier.index')" :active="request()->routeIs('admin.office.index')">
+                        {{ __('Courier') }}
+                    </x-nav-link>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('admin.car.index')" :active="request()->routeIs('admin.office.index')">
+                        {{ __('Car') }}
+                    </x-nav-link>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('admin.phone.index')" :active="request()->routeIs('admin.office.index')">
+                        {{ __('Phone') }}
+                    </x-nav-link>
+                </div>
+
             </div>
 
             @guest
