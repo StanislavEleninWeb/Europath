@@ -18,6 +18,17 @@ class OfficeController extends Controller
     }
 
     /**
+     * Display office byid.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getOfficeById($id)
+    {
+        $office = Office::with(['manager','couriers.user', 'phones'])->findOrFail($id);
+        return response()->json($office);
+    }    
+
+    /**
      * Display city by office id.
      *
      * @return \Illuminate\Http\Response

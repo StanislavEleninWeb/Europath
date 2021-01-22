@@ -85,10 +85,12 @@ Route::name('city.')->group(function(){
 	Route::get('city', [CityController::class, 'index'])->name('all');
 	Route::get('city/{id}/province', [CityController::class, 'getProvinceByCityId'])->name('province');
 	Route::get('city/{id}/region', [CityController::class, 'getRegionByCityId'])->name('region');
+	Route::get('city/{id}/office', [CityController::class, 'getOfficeByCityId'])->name('office');
 });
 
 Route::name('office.')->group(function(){
 	Route::get('office', [OfficeController::class, 'index'])->name('all');
+	Route::get('office/{id}', [OfficeController::class, 'getOfficeById'])->name('office');
 	Route::get('office/{id}/car', [OfficeController::class, 'getCarsByOfficeId'])->name('car');
 	Route::get('office/{id}/city', [OfficeController::class, 'getCityByOfficeId'])->name('city');
 	Route::get('office/{id}/courier', [OfficeController::class, 'getCouriersByOfficeId'])->name('courier');

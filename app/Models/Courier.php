@@ -12,6 +12,14 @@ class Courier extends Model
     /**
      * Get the office that owns the courier.
      */
+    public function user()
+    {
+        return $this->belongsTo(\App\Models\User::class, 'id');
+    }
+
+    /**
+     * Get the office that owns the courier.
+     */
     public function office()
     {
         return $this->belongsTo(\App\Models\Office::class);

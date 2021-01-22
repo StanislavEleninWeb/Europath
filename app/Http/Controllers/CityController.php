@@ -39,4 +39,15 @@ class CityController extends Controller
         return response()->json($city->region);
     }
 
+    /**
+     * Display a list of cities by region id.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getOfficeByCityId($id)
+    {
+        $city = City::with('offices')->findOrFail($id);
+        return response()->json($city->offices);
+    }
+
 }
