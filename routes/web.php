@@ -61,6 +61,8 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function(){
 	Route::get('office/{id}/courier', [\App\Http\Controllers\Admin\OfficeController::class, 'getCourier'])->name('office.courier');
 	Route::post('office/{id}/courier', [\App\Http\Controllers\Admin\OfficeController::class, 'storeCourier'])->name('office.courier.store');
 
+	Route::get('report', \App\Http\Controllers\Admin\ReportController::class)->name('report');
+
 	Route::resources([
 		'province' => \App\Http\Controllers\Admin\ProvinceController::class,
 		'region' => \App\Http\Controllers\Admin\RegionController::class,

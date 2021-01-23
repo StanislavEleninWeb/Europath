@@ -40,22 +40,29 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('admin.courier.index')" :active="request()->routeIs('admin.office.index')">
+                    <x-nav-link :href="route('admin.courier.index')" :active="request()->routeIs('admin.courier.index')">
                         {{ __('Courier') }}
                     </x-nav-link>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('admin.car.index')" :active="request()->routeIs('admin.office.index')">
+                    <x-nav-link :href="route('admin.car.index')" :active="request()->routeIs('admin.car.index')">
                         {{ __('Car') }}
                     </x-nav-link>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('admin.phone.index')" :active="request()->routeIs('admin.office.index')">
+                    <x-nav-link :href="route('admin.phone.index')" :active="request()->routeIs('admin.phone.index')">
                         {{ __('Phone') }}
+                    </x-nav-link>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('admin.report')" :active="request()->routeIs('admin.report')">
+                        {{ __('Report') }}
                     </x-nav-link>
                 </div>
 
