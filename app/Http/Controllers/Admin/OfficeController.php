@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -9,6 +10,9 @@ use App\Models\Province;
 use App\Models\City;
 use App\Models\Office;
 use App\Models\User;
+use App\Models\Phone;
+use App\Models\Courier;
+
 use App\Http\Requests\Office\StorePostRequest;
 
 class OfficeController extends Controller
@@ -49,6 +53,7 @@ class OfficeController extends Controller
     public function store(StorePostRequest $request)
     {
         $validated = $request->validated();
+
         $office = Office::create($validated);
         $office->cities()->sync($validated['cities']);
 
@@ -64,10 +69,10 @@ class OfficeController extends Controller
     public function edit(Office $office)
     {
         return view('office.admin.edit', [
-            'cities' => City::all(),
             'managers' => User::with(['roles'])->whereHas('roles', function($query){
                 return $query->where('name', 'manager');
             })->get(),
+            'provinces' => Province::all(),
             'office' => $office,
         ]);
     }
@@ -101,4 +106,75 @@ class OfficeController extends Controller
 
         return redirect()->back();
     }
+
+    /**
+     * Display cars by courier id.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getPhone($id)
+    {
+        $office = Office::with('phones')->findOrFail($id);
+
+        return view('office.admin.phone', [
+            'office' => $office,
+        ]);
+    }
+
+    /**
+     * Display cars by courier id.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function storePhone($id, Request $request)
+    {
+        $office = Office::findOrFail($id);
+
+        $validated = Validator::make($request->all(), [
+            'phone' => 'required|string',
+        ])->validate();
+
+        $phone = new Phone;
+        $phone->phone = $validated['phone'];
+
+        $phone->phoneable()->associate($office)->save();
+
+        return redirect()->route('admin.office.phone', $office->id);
+    }
+
+    /**
+     * Display cars by courier id.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getCourier($id)
+    {
+        $office = Office::with('couriers.user')->findOrFail($id);
+
+        return view('office.admin.courier', [
+            'office' => $office,
+            'couriers' => Courier::with('user')->get(),
+        ]);
+    }
+
+    /**
+     * Display cars by courier id.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function storeCourier($id, Request $request)
+    {
+        $office = Office::findOrFail($id);
+
+        $validated = Validator::make($request->all(), [
+            'courier_id' => 'required|integer',
+        ])->validate();
+
+        $courier = Courier::findOrFail($validated['courier_id']);
+
+        $office->couriers()->save($courier);
+
+        return redirect()->route('admin.office.courier', $office->id);
+    }
+
 }

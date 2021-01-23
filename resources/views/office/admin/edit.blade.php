@@ -22,13 +22,20 @@
 
 				<div class="mb-3">
 					<label class="form-label">Cities:</label>
-					<br/>
-					@foreach($cities as $city)
-					<label class="from-control m-3">
-						<input type="checkbox" name="cities[]" value="{{ $city->id }}" @if($office->cities->contains($city->id)) checked @endif>
-						{{ $city->name }}
-					</label>
-					@endforeach
+					<select name="cities[]" class="form-control" multiple>
+						<option></option>
+						@foreach($provinces as $province)
+						<optgroup label="{{ $province->name }}">
+							@foreach($province->regions as $region)
+							<optgroup label="{{ $region->name }}">
+								@foreach($region->cities as $city)
+								<option value="{{ $city->id }}" @if($office->cities->contains($city->id)) selected @endif >{{ $city->name }}</option>
+								@endforeach
+							</optgroup>
+							@endforeach
+						</optgroup>
+						@endforeach
+					</select>
 				</div>
 
 				<div class="mb-3">
@@ -45,8 +52,13 @@
 					<textarea name="opening_hours" class="form-control" required>{{ $office->opening_hours }}</textarea>
 				</div>
 
+				<div class="mb-3">
+					<a href="{{ route('admin.office.phone', $office->id) }}" class="btn btn-sm btn-info">Phones</a>
+					<a href="{{ route('admin.office.courier', $office->id) }}" class="btn btn-sm btn-info">Courier</a>
+				</div>
+
 				<div>
-				<input type="submit" value="Save" class="btn btn-primary">
+					<input type="submit" value="Save" class="btn btn-primary">
 					<a href="{{ route('admin.office.index') }}" class="btn btn-secondary">Back</a>
 				</div>
 			</form>

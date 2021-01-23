@@ -31,7 +31,7 @@
 
 				<div>
 				<input type="submit" value="Save" class="btn btn-primary">
-					<a href="{{ route('admin.city.index') }}" class="btn btn-secondary">Back</a>
+					<a href="{{ route('admin.courier.index') }}" class="btn btn-secondary">Back</a>
 				</div>
 			</form>
 		</div>

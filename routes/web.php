@@ -25,7 +25,7 @@ use App\Http\Controllers\CarController;
 //     return view('welcome');
 // });
 
-Route::get('/', HomeController::class);
+Route::get('/', HomeController::class)->name('home');
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +52,15 @@ require __DIR__.'/auth.php';
 */
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function(){
 
+	Route::get('courier/{id}/phone', [\App\Http\Controllers\Admin\CourierController::class, 'getPhone'])->name('courier.phone');
+	Route::post('courier/{id}/phone', [\App\Http\Controllers\Admin\CourierController::class, 'storePhone'])->name('courier.phone.store');
+	Route::resource('courier', \App\Http\Controllers\Admin\CourierController::class)->only(['index', 'show', 'destroy']);
+
+	Route::get('office/{id}/phone', [\App\Http\Controllers\Admin\OfficeController::class, 'getPhone'])->name('office.phone');
+	Route::post('office/{id}/phone', [\App\Http\Controllers\Admin\OfficeController::class, 'storePhone'])->name('office.phone.store');
+	Route::get('office/{id}/courier', [\App\Http\Controllers\Admin\OfficeController::class, 'getCourier'])->name('office.courier');
+	Route::post('office/{id}/courier', [\App\Http\Controllers\Admin\OfficeController::class, 'storeCourier'])->name('office.courier.store');
+
 	Route::resources([
 		'province' => \App\Http\Controllers\Admin\ProvinceController::class,
 		'region' => \App\Http\Controllers\Admin\RegionController::class,
@@ -61,8 +70,6 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function(){
 		'phone' => \App\Http\Controllers\Admin\PhoneController::class,
 		'user' => \App\Http\Controllers\Admin\UserController::class,
 	]);
-
-	Route::resource('courier', \App\Http\Controllers\Admin\CourierController::class)->only(['index', 'show', 'destroy']);
 
 });
 

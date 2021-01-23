@@ -38,6 +38,6 @@ class Courier extends Model
      */
     public function car()
     {
-        return $this->belongsToMany(\App\Models\Car::class, 'courier_car')->withPivot('deleted_at', 'created_at', 'updated_at');
+        return $this->belongsToMany(\App\Models\Car::class, 'courier_car')->withPivot('deleted_at', 'created_at', 'updated_at')->wherePivot('deleted_at', NULL);
     }
 }

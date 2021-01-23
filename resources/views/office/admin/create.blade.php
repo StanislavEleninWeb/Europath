@@ -20,12 +20,20 @@
 					</select>
 				</div>
 
-				<div id="province_container" class="mb-3">
-					<label class="form-label">Province:</label>
-					<select id="province" class="form-control">
+				<div class="mb-3">
+					<label class="form-label">Cities:</label>
+					<select name="cities[]" class="form-control" multiple>
 						<option></option>
 						@foreach($provinces as $province)
-						<option value="{{ $province->id }}">{{ $province->name }}</option>
+						<optgroup label="{{ $province->name }}">
+							@foreach($province->regions as $region)
+							<optgroup label="{{ $region->name }}">
+								@foreach($region->cities as $city)
+								<option value="{{ $city->id }}">{{ $city->name }}</option>
+								@endforeach
+							</optgroup>
+							@endforeach
+						</optgroup>
 						@endforeach
 					</select>
 				</div>
@@ -57,7 +65,7 @@
 @section('script')
 @parent
 
-<!-- Office -->
-<script src="{{ mix('js/office.js') }}" defer></script>
+<!-- Home js -->
+<script src="{{ mix('js/home.js') }}" defer></script>
 
 @endsection

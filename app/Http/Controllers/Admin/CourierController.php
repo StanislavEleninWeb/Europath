@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Courier;
+use App\Models\Phone;
 
 class CourierController extends Controller
 {
@@ -49,4 +51,40 @@ class CourierController extends Controller
 
         return redirect()->back();
     }
+
+     /**
+     * Display cars by courier id.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getPhone($id)
+    {
+        $courier = Courier::with('phones')->findOrFail($id);
+
+        return view('courier.admin.phone', [
+            'courier' => $courier,
+        ]);
+    }
+
+    /**
+     * Display cars by courier id.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function storePhone($id, Request $request)
+    {
+        $courier = Courier::findOrFail($id);
+
+        $validated = Validator::make($request->all(), [
+            'phone' => 'required|string',
+        ])->validate();
+
+        $phone = new Phone;
+        $phone->phone = $validated['phone'];
+
+        $phone->phoneable()->associate($courier)->save();
+
+        return redirect()->route('admin.courier.phone', $courier->id);
+    }
+
 }

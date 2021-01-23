@@ -20,7 +20,7 @@
 
 				<div class="mb-3">
 					<label class="form-label">Office:</label>
-					<select name="office_id" class="form-control" required>
+					<select id="office" name="office_id" class="form-control" required>
 						<option></option>
 						@foreach($offices as $itr)
 						<option value="{{ $itr->id }}" @if($itr->id == $car->office_id) selected @endif>{{ $itr->name }}</option>

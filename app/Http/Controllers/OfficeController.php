@@ -24,7 +24,7 @@ class OfficeController extends Controller
      */
     public function getOfficeById($id)
     {
-        $office = Office::with(['manager','couriers.user', 'phones'])->find($id);
+        $office = Office::with(['manager','couriers.user', 'couriers.phones', 'couriers.car', 'phones'])->find($id);
         return response()->json($office);
     }    
 

@@ -7,22 +7,18 @@
 			<table class="table table-hover">
 				<thead>
 					<th>ID</th>
-					<th>UUID</th>
 					<th>Name</th>
-					<th>Office</th>
 					<th>
 						
 					</th>
 				</thead>
-				@foreach($couriers as $itr)
+				@foreach($users as $itr)
 				<tr>
 					<td>{{ $itr->id }}</td>
-					<td>{{ $itr->uuid }}</td>
-					<td>{{ $itr->user->name }}</td>
-					<td>{{ $itr->office->name }}</td>
+					<td>{{ $itr->name }}</td>
 					<td>
-						<a href="{{ route('admin.courier.show', $itr->id) }}" class="btn btn-sm btn-info">Show</a>
-						<form action="{{ route('admin.courier.destroy', $itr->id) }}" method="POST">
+						<a href="{{ route('admin.user.edit', $itr->id) }}" class="btn btn-sm btn-warning">Edit</a>
+						<form action="{{ route('admin.user.destroy', $itr->id) }}" method="POST">
 							@csrf
 							@method('DELETE')
 							<input type="submit" class="btn btn-sm btn-danger" value="Delete">

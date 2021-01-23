@@ -192,7 +192,9 @@ $(document).ready(function () {
             var office_td_phones = td.cloneNode(true);
             var office_td_address = td.cloneNode(true);
             var office_td_opening_hours = td.cloneNode(true);
-            office_td_phones.innerHTML = data.phones;
+            $.each(data.phones, function (key, val) {
+              office_td_phones.append(val.phone + '<br />');
+            });
             office_td_address.innerHTML = data.address;
             office_td_opening_hours.innerHTML = data.opening_hours;
             office_tr.append(office_td_phones);
@@ -205,8 +207,12 @@ $(document).ready(function () {
               var courier_td_car = td.cloneNode(true);
               var courier_td_phone = td.cloneNode(true);
               courier_td_name.innerHTML = val.user.first_name + ' ' + val.user.last_name;
-              courier_td_car.innerHTML = val.car;
-              courier_td_phone.innerHTML = val.phones;
+              $.each(val.car, function (k, v) {
+                courier_td_car.append(v.brand + ' ' + v.model + ' ' + v.registration + '<br />');
+              });
+              $.each(val.phones, function (k, v) {
+                courier_td_phone.append(v.phone + '<br />');
+              });
               courier_tr.append(courier_td_name);
               courier_tr.append(courier_td_car);
               courier_tr.append(courier_td_phone); // Push table row
@@ -269,8 +275,12 @@ $(document).ready(function () {
         var courier_td_car = td.cloneNode(true);
         var courier_td_phone = td.cloneNode(true);
         courier_td_name.innerHTML = data.user.first_name + ' ' + data.user.last_name;
-        courier_td_car.innerHTML = data.car;
-        courier_td_phone.innerHTML = data.phones;
+        $.each(data.car, function (key, val) {
+          courier_td_car.append(val.brand + ' ' + val.model + ' ' + val.registration + '<br />');
+        });
+        $.each(data.phones, function (key, val) {
+          courier_td_phone.append(val.phone + '<br />');
+        });
         courier_tr.append(courier_td_name);
         courier_tr.append(courier_td_car);
         courier_tr.append(courier_td_phone);
