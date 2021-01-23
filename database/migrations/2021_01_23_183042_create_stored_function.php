@@ -43,9 +43,8 @@ class CreateStoredFunction extends Migration
             SELECT COUNT(id) 
             INTO counter 
             FROM courier_car 
-            WHERE courier_id = courierId
-            AND car_id = carId
-            AND deleted_at IS NULL;
+            WHERE (courier_id = 1 AND deleted_at IS NULL)
+            OR (car_id = 4 AND deleted_at IS NULL);
 
             RETURN counter;
 

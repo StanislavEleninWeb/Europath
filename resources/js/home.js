@@ -289,7 +289,7 @@ $(document).ready(function(){
 		          success: function(data) {
 		            response($.map(data, function(itr){
 		            	return {
-		            		label: itr.uuid,
+		            		label: itr.user.first_name + ' ' + itr.user.last_name,
 		            		value: itr.uuid,
 		            	};
 		            }));

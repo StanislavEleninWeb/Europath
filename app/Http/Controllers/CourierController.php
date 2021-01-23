@@ -47,7 +47,7 @@ class CourierController extends Controller
     public function getAutocompleteByUuid(Request $request)
     {
         $uuid = filter_var(trim($request->data), FILTER_SANITIZE_STRING);
-        $courier = Courier::with('phones')->where('uuid', 'LIKE', $uuid . '%')->get();
+        $courier = Courier::with(['user', 'phones'])->where('uuid', 'LIKE', $uuid . '%')->get();
         return response()->json($courier);
     }
 

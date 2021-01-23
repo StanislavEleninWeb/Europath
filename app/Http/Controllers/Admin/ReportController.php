@@ -16,11 +16,6 @@ class ReportController extends Controller
      */
     public function __invoke()
     {
-
-        $result = DB::select('CALL insertCourierCarRelation(1,1);');
-
-        dd($result);
-
         $report = collect(DB::select('SELECT * FROM courier_car_report'));
         return view('report.admin.index', [
             'report' => $report,
