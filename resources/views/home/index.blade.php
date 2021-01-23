@@ -15,12 +15,12 @@
 			<div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
                 
 
-                <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
+                <div class="mt-4 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
                     <div class="grid grid-cols-1 md:grid-cols-3">
                         
                         <div class="p-6 border-t border-gray-200 dark:border-gray-700">
                             <div class="flex items-center">
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel-news.com/" class="underline text-gray-900 dark:text-white">Province</a></div>
+                                <div class="ml-4 text-lg leading-7 font-semibold">Province</div>
                             </div>
 
                             <div class="ml-4">
@@ -37,7 +37,7 @@
 
                         <div class="p-6 border-t border-gray-200 dark:border-gray-700">
                             <div class="flex items-center">
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel-news.com/" class="underline text-gray-900 dark:text-white">Region</a></div>
+                                <div class="ml-4 text-lg leading-7 font-semibold">Region</div>
                             </div>
 
                             <div class="ml-4">
@@ -51,7 +51,7 @@
 
                         <div class="p-6 border-t border-gray-200 dark:border-gray-700">
                             <div class="flex items-center">
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel-news.com/" class="underline text-gray-900 dark:text-white">City</a></div>
+                                <div class="ml-4 text-lg leading-7 font-semibold">City</div>
                             </div>
 
                             <div class="ml-4">
@@ -67,7 +67,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-1">
                         <div class="p-6 border-t border-gray-200 dark:border-gray-700">
                             <div class="flex items-center">
-                                <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel-news.com/" class="underline text-gray-900 dark:text-white">Office</a></div>
+                                <div class="ml-4 text-lg leading-7 font-semibold">Office</div>
                             </div>
 
                             <div class="ml-4">
@@ -79,9 +79,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
                     <div class="grid grid-cols-1 md:grid-cols-1">
                         <div class="p-6 border-t border-gray-200 dark:border-gray-700">
                             <div class="ml-4">
@@ -102,6 +99,37 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
+                    <div class="grid grid-cols-1 md:grid-cols-1">
+                        <div class="p-6 border-t border-gray-200 dark:border-gray-700">
+                            <div class="flex items-center">
+                                <div class="ml-4 text-lg leading-7 font-semibold">Search for courier by uuid</div>
+                            </div>
+                            <form id="uuid_form" method="GET" action="#" class="mt-1 ml-4">
+                                @csrf
+                                <div class="input-group mb-3">
+                                    <input id="uuid_autocomplete" type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+                                    <input class="btn btn-outline-secondary" type="submit" value="Search" id="button-addon2">
+                                </div>
+                            </form>
+                            <div class="table-responsive-md ml-4">
+                              <table class="table table-hover">
+                                <tbody id="uuid_autocomplete_container"></tbody>
+                              </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 bg-white dark:bg-gray-800 overflow-hidden shadow sm:rounded-lg">
+                    <div class="grid grid-cols-1 md:grid-cols-1">
+                        <div class="p-6 border-t border-gray-200 dark:border-gray-700">
+                            
+                        </div>
+                    </div>
+                </div>
+
 
             </div>
             

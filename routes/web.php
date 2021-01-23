@@ -8,6 +8,7 @@ use App\Http\Controllers\RegionController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\OfficeController;
 use App\Http\Controllers\CourierController;
+use App\Http\Controllers\CarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -101,6 +102,14 @@ Route::name('office.')->group(function(){
 
 Route::name('courier.')->group(function(){
 	Route::get('courier', [CourierController::class, 'index'])->name('all');
+	Route::get('courier/uuid/{uuid}', [CourierController::class, 'getCourierByUuid'])->name('uuid');
+	Route::post('courier/uuid/autocomplete', [CourierController::class, 'getAutocompleteByUuid'])->name('autocomplete');
 	Route::get('courier/{id}', [CourierController::class, 'getCourierById'])->name('courier');
 	Route::get('courier/{id}/car', [CourierController::class, 'getCarsByCourierId'])->name('car');
+});
+
+Route::name('car.')->group(function(){
+	Route::get('car', [CarController::class, 'index'])->name('all');
+	Route::get('car/{id}', [CarController::class, 'getCarById'])->name('car');
+	Route::get('car/{id}/car', [CarController::class, 'getCourierByCarId'])->name('courier');
 });

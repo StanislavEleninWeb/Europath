@@ -18,6 +18,15 @@ class CourierCar extends Model
     protected $table = 'courier_car';
 
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'deleted_at',
+    ];
+
+    /**
      * The roles that belong to the user.
      */
     public function cars()

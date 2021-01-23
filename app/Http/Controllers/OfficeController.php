@@ -24,7 +24,7 @@ class OfficeController extends Controller
      */
     public function getOfficeById($id)
     {
-        $office = Office::with(['manager','couriers.user', 'phones'])->findOrFail($id);
+        $office = Office::with(['manager','couriers.user', 'phones'])->find($id);
         return response()->json($office);
     }    
 
@@ -35,7 +35,7 @@ class OfficeController extends Controller
      */
     public function getCityByOfficeId($id)
     {
-        $office = Office::with('cities')->findOrFail($id);
+        $office = Office::with('cities')->find($id);
         return response()->json($office->cities);
     }
 
@@ -46,7 +46,7 @@ class OfficeController extends Controller
      */
     public function getCarsByOfficeId($id)
     {
-        $office = Office::with('cars')->findOrFail($id);
+        $office = Office::with('cars')->find($id);
         return response()->json($office->cars);
     }
 
@@ -57,7 +57,7 @@ class OfficeController extends Controller
      */
     public function getCouriersByOfficeId($id)
     {
-        $office = Office::with('couriers')->findOrFail($id);
+        $office = Office::with('couriers.user')->find($id);
         return response()->json($office->couriers);
     }
 

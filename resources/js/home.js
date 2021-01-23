@@ -1,12 +1,18 @@
 $(document).ready(function(){
 
+	$.ajaxSetup({
+	    headers: {
+	        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	    }
+	});
+
 	/**
 	|	Province change action
 	|
 	|
 	*/
-	$('#province').change(function($e){
-		$e.preventDefault();
+	$('#province').change(function(event){
+		event.preventDefault();
 
 		const region = $('#region');
 		const city = $('#city');
@@ -65,8 +71,8 @@ $(document).ready(function(){
 	|
 	|
 	*/
-	$('#region').change(function($e){
-		$e.preventDefault();
+	$('#region').change(function(event){
+		event.preventDefault();
 
 		const city = $('#city');
 		const office = $('#office');
@@ -123,8 +129,8 @@ $(document).ready(function(){
 	|
 	|
 	*/
-	$('#city').change(function($e){
-		$e.preventDefault();
+	$('#city').change(function(event){
+		event.preventDefault();
 
 		const office = $('#office');
 		const office_container = $('#office_container');
@@ -178,8 +184,8 @@ $(document).ready(function(){
 	|
 	|
 	*/
-	$('#office').change(function($e){
-		$e.preventDefault();
+	$('#office').change(function(event){
+		event.preventDefault();
 
 		const office_container = $('#office_container');
 		const courier_container = $('#courier_container');
@@ -251,6 +257,76 @@ $(document).ready(function(){
 		}
 	});
 
+
+	/**
+	|	Province change action
+	|
+	|
+	*/
+	$('#uuid_autocomplete').on('input', function(event){
+		event.preventDefault();
+
+		let value = $(this).val();
+
+		$(this).autocomplete({
+			minLength: 3,
+			source: function(request, response){
+				$.ajax({
+		          type: 'POST',
+		          url: '/courier/uuid/autocomplete',
+		          async: true,
+		          cache: false,
+		          dataType: "json",
+		          data: {
+		          	data: value,
+		          },
+		          success: function(data) {
+		            response($.map(data, function(itr){
+		            	return {
+		            		label: itr.uuid,
+		            		value: itr.uuid,
+		            	};
+		            }));
+		          }
+		        });
+			},
+		});
+
+	});
+
+	$('#uuid_form').on('submit', function(event){
+		event.preventDefault();
+
+		let input = $('#uuid_autocomplete');
+
+		$.ajax({
+          type: 'GET',
+          url: '/courier/uuid/' + input.val(),
+          async: true,
+          cache: false,
+          dataType: "json",
+          success: function(data) {
+            input.val('');
+
+			let td = document.createElement('td');
+
+            let courier_tr = document.createElement('tr');
+			let courier_td_name = td.cloneNode(true);
+			let courier_td_car = td.cloneNode(true);
+			let courier_td_phone = td.cloneNode(true);
+
+			courier_td_name.innerHTML = data.user.first_name + ' ' + data.user.last_name;
+			courier_td_car.innerHTML = data.car;
+			courier_td_phone.innerHTML = data.phones;
+
+			courier_tr.append(courier_td_name);
+			courier_tr.append(courier_td_car);
+			courier_tr.append(courier_td_phone);
+
+			$('#uuid_autocomplete_container').append(courier_tr);
+          }
+        });
+	});
 
 
 });

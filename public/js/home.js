@@ -3,13 +3,19 @@
   !*** ./resources/js/home.js ***!
   \******************************/
 $(document).ready(function () {
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+  });
   /**
   |	Province change action
   |
   |
   */
-  $('#province').change(function ($e) {
-    $e.preventDefault();
+
+  $('#province').change(function (event) {
+    event.preventDefault();
     var region = $('#region');
     var city = $('#city');
     var office = $('#office');
@@ -60,8 +66,8 @@ $(document).ready(function () {
   |
   */
 
-  $('#region').change(function ($e) {
-    $e.preventDefault();
+  $('#region').change(function (event) {
+    event.preventDefault();
     var city = $('#city');
     var office = $('#office');
     var office_container = $('#office_container');
@@ -109,8 +115,8 @@ $(document).ready(function () {
   |
   */
 
-  $('#city').change(function ($e) {
-    $e.preventDefault();
+  $('#city').change(function (event) {
+    event.preventDefault();
     var office = $('#office');
     var office_container = $('#office_container');
     var courier_container = $('#courier_container');
@@ -155,8 +161,8 @@ $(document).ready(function () {
   |
   */
 
-  $('#office').change(function ($e) {
-    $e.preventDefault();
+  $('#office').change(function (event) {
+    event.preventDefault();
     var office_container = $('#office_container');
     var courier_container = $('#courier_container');
     var value = $(this).val();
@@ -212,6 +218,65 @@ $(document).ready(function () {
         }
       });
     }
+  });
+  /**
+  |	Province change action
+  |
+  |
+  */
+
+  $('#uuid_autocomplete').on('input', function (event) {
+    event.preventDefault();
+    var value = $(this).val();
+    $(this).autocomplete({
+      minLength: 3,
+      source: function source(request, response) {
+        $.ajax({
+          type: 'POST',
+          url: '/courier/uuid/autocomplete',
+          async: true,
+          cache: false,
+          dataType: "json",
+          data: {
+            data: value
+          },
+          success: function success(data) {
+            response($.map(data, function (itr) {
+              return {
+                label: itr.uuid,
+                value: itr.uuid
+              };
+            }));
+          }
+        });
+      }
+    });
+  });
+  $('#uuid_form').on('submit', function (event) {
+    event.preventDefault();
+    var input = $('#uuid_autocomplete');
+    $.ajax({
+      type: 'GET',
+      url: '/courier/uuid/' + input.val(),
+      async: true,
+      cache: false,
+      dataType: "json",
+      success: function success(data) {
+        input.val('');
+        var td = document.createElement('td');
+        var courier_tr = document.createElement('tr');
+        var courier_td_name = td.cloneNode(true);
+        var courier_td_car = td.cloneNode(true);
+        var courier_td_phone = td.cloneNode(true);
+        courier_td_name.innerHTML = data.user.first_name + ' ' + data.user.last_name;
+        courier_td_car.innerHTML = data.car;
+        courier_td_phone.innerHTML = data.phones;
+        courier_tr.append(courier_td_name);
+        courier_tr.append(courier_td_car);
+        courier_tr.append(courier_td_phone);
+        $('#uuid_autocomplete_container').append(courier_tr);
+      }
+    });
   });
 });
 /******/ })()
