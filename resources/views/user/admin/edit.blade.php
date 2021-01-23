@@ -29,23 +29,11 @@
 				</div>
 
 				<div class="mb-3">
-					<label class="form-label">Roles:</label>
-					<select name="province_id" class="form-control" required>
-						<option></option>
-						@foreach($roles as $itr)
-						<option value="{{ $itr->id }}">{{ $itr->name }}</option>
-						@endforeach
-					</select>
+					<a href="{{ route('admin.user.phone', $user->id) }}" class="btn btn-sm btn-info">Phones</a>
 				</div>
 
 				<div class="mb-3">
-					<label class="form-label">Phones:</label>
-					<select name="province_id" class="form-control" required>
-						<option></option>
-						@foreach($user->phones as $itr)
-						<option value="{{ $itr->id }}" >{{ $itr->phone }}</option>
-						@endforeach
-					</select>
+					<a href="{{ route('admin.user.role', $user->id) }}" class="btn btn-sm btn-info">Roles</a>
 				</div>
 
 

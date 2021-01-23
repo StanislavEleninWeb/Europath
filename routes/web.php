@@ -61,6 +61,11 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function(){
 	Route::get('office/{id}/courier', [\App\Http\Controllers\Admin\OfficeController::class, 'getCourier'])->name('office.courier');
 	Route::post('office/{id}/courier', [\App\Http\Controllers\Admin\OfficeController::class, 'storeCourier'])->name('office.courier.store');
 
+	Route::get('user/{id}/phone', [\App\Http\Controllers\Admin\UserController::class, 'getPhone'])->name('user.phone');
+	Route::post('user/{id}/phone', [\App\Http\Controllers\Admin\UserController::class, 'storePhone'])->name('user.phone.store');
+	Route::get('user/{id}/role', [\App\Http\Controllers\Admin\UserController::class, 'getRole'])->name('user.role');
+	Route::post('user/{id}/role', [\App\Http\Controllers\Admin\UserController::class, 'storeRole'])->name('user.role.store');
+
 	Route::get('report', \App\Http\Controllers\Admin\ReportController::class)->name('report');
 
 	Route::resources([

@@ -42,11 +42,14 @@ class CreateInsertProcedure extends Migration
             BEGIN
 
                 IF (checkActiveCourierCarRelation(courierId,carId) > 0) THEN
-                    SELECT * FROM cars;
-                ELSE
-                    INSERT INTO courier_car(courier_id, car_id, created_at, updated_at)
-                    VALUES(courierId, carId, NOW(), NOW());
+                    UPDATE courier_car SET delete_at = NOW()
+                    WHERE (courier_id = courierId AND deleted_at IS NULL)
+                    OR (car_id = carId AND deleted_at IS NULL);
                 END IF;
+                
+                INSERT INTO courier_car(courier_id, car_id, created_at, updated_at)
+                VALUES(courierId, carId, NOW(), NOW());
+                
 
             END;
         ";

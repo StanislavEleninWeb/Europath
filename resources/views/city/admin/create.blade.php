@@ -4,19 +4,24 @@
 <div class="container">
 	<div class="row">
 		<div class="col pt-3">
-			<form method="POST" action="{{ route('admin.office.store') }}" class="form mt-3">
+			<form method="POST" action="{{ route('admin.city.store') }}" class="form mt-3">
 				@csrf
 
 				@include('components.form-errors')
 
 				<div class="mb-3">
-					<label class="form-label">Manager:</label>
-					<select name="manager" class="form-control" required>
+					<label class="form-label">Region:</label>
+					<select name="region_id" class="form-control" required>
 						<option></option>
-						@foreach($managers as $itr)
-						<option value="{{ $itr->id }}">{{ $itr->name }}</option>
+						@foreach($regions as $itr)
+						<option value="{{ $itr->id }}" >{{ $itr->name }}</option>
 						@endforeach
 					</select>
+				</div>
+
+				<div class="mb-3">
+					<label class="form-label">Post code:</label>
+					<input type="text" name="post_code" class="form-control" required>
 				</div>
 
 				<div class="mb-3">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -49,15 +50,20 @@ class CarController extends Controller
             'courier_id' => 'nullable|integer',
             'brand' => 'required|string|min:2|max:50',
             'model' => 'required|string|min:2|max:50',
-            'registration' => 'required|string|min:8|max:10',
+            'registration' => 'required|string|min:8|max:10|unique:cars',
             'fuel' => 'required|string|min:2',
             'fuel_consumption' => 'required|numeric',
         ])->validate();
 
         $car = Car::create($validated);
 
-        if(isset($validated['courier_id']))
-            $car->courier()->attach($validated['courier_id']);
+        DB::select('CALL insertCourierCarRelation(?,?)', [
+            $validated['courier_id'],
+            $car->id,
+        ]);
+
+        // if(isset($validated['courier_id']))
+        //     $car->courier()->attach($validated['courier_id']);
 
         return redirect()->route('admin.car.edit', $car->id);
     }
